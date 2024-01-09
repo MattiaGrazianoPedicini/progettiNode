@@ -1,4 +1,4 @@
-/*function salvaDati(dati, chiaveBody) {
+function salvaDati(dati, chiaveBody) {
   return new Promise((resolve, reject) => {
     fetch("https://ws.progettimolinari.it/cache/set", {
       method: "POST",
@@ -22,7 +22,7 @@
         reject(error);
       });
   });
-}*/
+}
 
 let chiave = "";
 let dato = "";
@@ -35,14 +35,11 @@ const readline = require(`readline`).createInterface({
 readline.question(`Inserire chiave: `, (name) => {
   chiave = name;
   console.log(`chiave inserita: ${name}`);
-  readline.close();
+  readline.question(`Inserire dato: `, (name2) => {
+    dato = name2;
+    console.log(`dato inserito: ${name2}`);
+    readline.close();
+  });
 });
-
-readline.question(`Inserire dato: `, (name) => {
-  dato = name;
-  console.log(`dato inserito: ${name}`);
-  readline.close();
-});
-
 //salvaDati(dato, chiave);
 

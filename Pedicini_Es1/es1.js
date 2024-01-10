@@ -1,3 +1,8 @@
+import fetch from "node-fetch";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
 function salvaDati(dati, chiaveBody) {
   return new Promise((resolve, reject) => {
     fetch("https://ws.progettimolinari.it/cache/set", {
@@ -34,12 +39,10 @@ const readline = require(`readline`).createInterface({
 
 readline.question(`Inserire chiave: `, (name) => {
   chiave = name;
-  console.log(`chiave inserita: ${name}`);
   readline.question(`Inserire dato: `, (name2) => {
     dato = name2;
-    console.log(`dato inserito: ${name2}`);
     readline.close();
+    console.log("---------------------------- dato: " + dato + " chiave: " + chiave);
+    salvaDati(dato, chiave);
   });
 });
-//salvaDati(dato, chiave);
-

@@ -3,13 +3,17 @@ import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-function salvaDati(dati, chiaveBody) {
+const fs = require('fs');
+const conf = JSON.parse(fs.readFileSync('../conf.json'));
+const token = conf.token;
+
+function salvaDati(dati, chiaveBody, tok) {
   return new Promise((resolve, reject) => {
     fetch("https://ws.progettimolinari.it/cache/set", {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        key: "30b2faf6-1887-445f-b1d8-d4b7aa30bb89",
+        key: tok,
       },
       body: JSON.stringify({
         key: chiaveBody,
@@ -43,6 +47,6 @@ readline.question(`Inserire chiave: `, (name) => {
     dato = name2;
     readline.close();
     console.log("---------------------------- dato: " + dato + " chiave: " + chiave);
-    salvaDati(dato, chiave);
+    salvaDati(dato, chiave, token);
   });
 });

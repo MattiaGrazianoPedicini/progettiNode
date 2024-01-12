@@ -48,7 +48,7 @@ readline.question(`Inserire utente: `, (name) => {
     readline.close();
     recuperaDati(utente, token).then((response) => {
         if (response===pass) {
-            console.log("Loggato");
+            console.log("Utente loggato");
         }else{
             console.log("Utente non presente");
         }
